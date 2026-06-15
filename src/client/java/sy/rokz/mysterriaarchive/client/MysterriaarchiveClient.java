@@ -5,8 +5,10 @@ import com.google.gson.JsonObject;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.item.v1.ItemTooltipCallback;
 import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
+import net.fabricmc.fabric.api.resource.v1.ResourceLoader;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.packs.PackType;
 
 public class MysterriaarchiveClient implements ClientModInitializer {
@@ -16,8 +18,9 @@ public static final ResourceReLoader CLIENT_DATA_LOADER = new ResourceReLoader()
 
     @Override
     public void onInitializeClient() {
-        ResourceManagerHelper.get(PackType.CLIENT_RESOURCES)
-                .registerReloadListener(CLIENT_DATA_LOADER);
+        ResourceLoader.get(PackType.CLIENT_RESOURCES)
+                .registerReloadListener(Identifier.fromNamespaceAndPath("mys", "client_json_loader"),CLIENT_DATA_LOADER);
+
         ItemTooltipCallback.EVENT.register((stack, _, _, lines) -> {
           JsonObject ings = CLIENT_DATA_LOADER.getJson();
           if (ings != null) {
