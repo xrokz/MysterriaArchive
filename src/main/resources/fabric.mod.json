@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "id": "mysterriaarchive",
+  "version": "${version}",
+  "name": "MysterriaArchive",
+  "description": "",
+  "authors": [],
+  "contact": {},
+  "license": "All-Rights-Reserved",
+  "icon": "assets/mysterriaarchive/icon.png",
+  "environment": "client",
+  "entrypoints": {
+    "fabric-datagen": [
+      "sy.rokz.mysterriaarchive.client.MysterriaarchiveDataGenerator"
+    ],
+    "client": [
+      "sy.rokz.mysterriaarchive.client.MysterriaarchiveClient"
+    ],
+    "main": [
+      "sy.rokz.mysterriaarchive.Mysterriaarchive"
+    ]
+  },
+  "mixins": [
+    "mysterriaarchive.mixins.json",
+    {
+      "config": "mysterriaarchive.client.mixins.json",
+      "environment": "client"
+    }
+  ],
+  "depends": {
+    "fabricloader": ">=${loader_version}",
+    "fabric-api": "*",
+    "minecraft": "${minecraft_version}"
+  }
+}
