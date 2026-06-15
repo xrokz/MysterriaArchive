@@ -5,6 +5,7 @@ import com.google.gson.JsonObject;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.item.v1.ItemTooltipCallback;
 import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
+import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.packs.PackType;
 
@@ -23,10 +24,12 @@ public static final ResourceReLoader CLIENT_DATA_LOADER = new ResourceReLoader()
               if (stack.getCustomName() != null) {
                   JsonElement ing = ings.get(stack.getCustomName().getString());
                   if (ing != null) {
-                      String path = ing.getAsJsonObject().get("pathname").getAsString();
+                      String path = ing.getAsJsonObject().get("path").getAsString();
                       String Seq = Integer.toString(ing.getAsJsonObject().get("seq").getAsInt());
-                      boolean isSupplementary = ing.getAsJsonObject().get("isSupplementary").getAsBoolean();
-                      lines.add(Component.literal(((isSupplementary) ? "Supplementary" : "Main") + " ingredient for sequence "+Seq+" of "+path+" pathway").withStyle(PathColors.valueOf(path.replaceAll(" ", "_")).toFormat()));
+                      boolean isMain = ing.getAsJsonObject().get("main").getAsBoolean();
+                      ChatFormatting format = PathColors.valueOf(path.replaceAll(" ", "_")).toFormat();
+                      lines.add(Component.literal(((isMain) ? "Main" : "Supplementary") + " ingredient").withStyle(format));
+                      lines.add(Component.literal("Sequence "+Seq+" of "+path+" pathway").withStyle(format));
                   }
               }
           }
