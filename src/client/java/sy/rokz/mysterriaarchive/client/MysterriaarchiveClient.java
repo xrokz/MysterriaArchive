@@ -4,7 +4,6 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.item.v1.ItemTooltipCallback;
-import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
 import net.fabricmc.fabric.api.resource.v1.ResourceLoader;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
@@ -25,7 +24,7 @@ public static final ResourceReLoader CLIENT_DATA_LOADER = new ResourceReLoader()
           JsonObject ings = CLIENT_DATA_LOADER.getJson();
           if (ings != null) {
               if (stack.getCustomName() != null) {
-                  JsonElement ing = ings.get(stack.getCustomName().getString());
+                  JsonElement ing = ings.get(stack.getCustomName().getString().replaceAll("Shard of ", ""));
                   if (ing != null) {
                       String path = ing.getAsJsonObject().get("path").getAsString();
                       String Seq = Integer.toString(ing.getAsJsonObject().get("seq").getAsInt());
