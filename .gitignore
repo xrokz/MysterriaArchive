@@ -11,9 +11,10 @@ build
 out/
 .idea
 *.iml
+src/client/resources/assets/mys/jsons/
 # mpeltonen/sbt-idea plugin
 .idea_modules/
-src/client/resources/assets/mys/jsons/mysings.json
+
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 
